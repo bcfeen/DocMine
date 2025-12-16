@@ -187,14 +187,19 @@ DocMine is designed for efficiency:
 
 ### Benchmarks
 
-*Tested on M1 MacBook Pro*
+*Measured on macOS (Apple Silicon M1) with Python 3.13*
 
-| Task | Duration | Details |
-|------|----------|---------|
-| Extract 100-page PDF | ~2s | Text extraction only |
-| Chunk 100 pages | ~1s | Semantic segmentation |
-| Embed 500 chunks | ~15s | Using all-mpnet-base-v2 |
-| Search query | <1s | Cosine similarity over 10K chunks |
+| PDF Size | Pages | Extraction | Chunks | Chunking | Embedding | **Total** |
+|----------|-------|-----------|--------|----------|-----------|-----------|
+| Small (8 pages) | 15 | 0.11s | 233 | 0.81s | 11.26s | **24.9s** |
+| Medium (13 pages) | 48 | 0.37s | 1582 | 3.33s | 14.45s | **106.1s** |
+| Large (34 pages) | 16 | 0.07s | 517 | 1.41s | 4.45s | **32.1s** |
+
+**Search Performance:**
+- Average query latency: **145ms**
+- Measured over 10 queries on indexed corpus
+
+*Note: Benchmark PDFs are academic papers from arXiv. Performance varies by document structure and content density.*
 
 ---
 
