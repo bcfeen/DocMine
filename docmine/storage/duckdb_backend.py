@@ -27,7 +27,7 @@ class DuckDBBackend:
         # Create chunks table
         self.conn.execute("""
             CREATE TABLE IF NOT EXISTS chunks (
-                id INTEGER PRIMARY KEY,
+                id INTEGER,
                 source_pdf VARCHAR,
                 page_num INTEGER,
                 chunk_index INTEGER,
@@ -53,11 +53,16 @@ class DuckDBBackend:
             chunks: List of chunk dictionaries
             embeddings: Numpy array of embeddings (shape: [num_chunks, 768])
         """
+        # Get the current max ID to generate new IDs
+        result = self.conn.execute("SELECT COALESCE(MAX(id), 0) FROM chunks").fetchone()
+        next_id = result[0] + 1 if result else 1
+
         for chunk, embedding in zip(chunks, embeddings):
             self.conn.execute("""
-                INSERT INTO chunks (source_pdf, page_num, chunk_index, location, content, embedding)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO chunks (id, source_pdf, page_num, chunk_index, location, content, embedding)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             """, [
+                next_id,
                 source_pdf,
                 chunk["page_num"],
                 chunk["chunk_index"],
@@ -65,6 +70,7 @@ class DuckDBBackend:
                 chunk["content"],
                 embedding.tolist()
             ])
+            next_id += 1
 
         self.conn.commit()
         logger.info(f"Stored {len(chunks)} chunks from {source_pdf}")
