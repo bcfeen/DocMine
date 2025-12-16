@@ -12,11 +12,11 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="DocMine Contributors",
-    url="https://github.com/yourusername/docmine",
+    url="https://github.com/bcfeen/DocMine",
     project_urls={
-        "Bug Tracker": "https://github.com/yourusername/docmine/issues",
-        "Documentation": "https://github.com/yourusername/docmine#readme",
-        "Source Code": "https://github.com/yourusername/docmine",
+        "Bug Tracker": "https://github.com/bcfeen/DocMine/issues",
+        "Documentation": "https://github.com/bcfeen/DocMine#readme",
+        "Source Code": "https://github.com/bcfeen/DocMine",
     },
     packages=find_packages(),
     install_requires=[

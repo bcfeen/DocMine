@@ -26,4 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for any sentence-transformers model
 - Robust error handling for malformed PDFs
 
-[0.1.0]: https://github.com/yourusername/docmine/releases/tag/v0.1.0
+[0.1.0]: https://github.com/bcfeen/DocMine/releases/tag/v0.1.0

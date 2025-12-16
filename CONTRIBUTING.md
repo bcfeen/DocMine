@@ -42,8 +42,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/docmine.git
-cd docmine
+git clone https://github.com/bcfeen/DocMine.git
+cd DocMine
 
 # Create virtual environment
 python -m venv .venv
