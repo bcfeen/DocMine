@@ -189,11 +189,11 @@ DocMine is designed for efficiency:
 
 *Measured on macOS (Apple Silicon M1) with Python 3.13*
 
-| PDF Size | Pages | Extraction | Chunks | Chunking | Embedding | **Total** |
-|----------|-------|-----------|--------|----------|-----------|-----------|
-| Small (8 pages) | 15 | 0.11s | 233 | 0.81s | 11.26s | **24.9s** |
-| Medium (13 pages) | 48 | 0.37s | 1582 | 3.33s | 14.45s | **106.1s** |
-| Large (34 pages) | 16 | 0.07s | 517 | 1.41s | 4.45s | **32.1s** |
+| PDF | Pages | Extraction | Chunks | Chunking | Embedding | **Total** |
+|-----|-------|-----------|--------|----------|-----------|-----------|
+| 15-page paper | 15 | 0.11s | 233 | 0.81s | 11.26s | **24.9s** |
+| 16-page paper | 16 | 0.07s | 517 | 1.41s | 4.45s | **32.1s** |
+| 48-page paper | 48 | 0.37s | 1582 | 3.33s | 14.45s | **106.1s** |
 
 **Search Performance:**
 - Average query latency: **145ms**
