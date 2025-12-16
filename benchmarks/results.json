@@ -1,88 +1,88 @@
 {
-  "timestamp": "2025-12-16T01:21:16.566604",
+  "timestamp": "2025-12-16T01:42:47.191432",
   "system": {
     "os": "Darwin 24.3.0",
     "machine": "arm64",
     "python": "3.13.5",
     "cpu_cores": 8
   },
-  "large_34pages.pdf": {
-    "extraction": {
-      "pages": 16,
-      "avg_time_seconds": 0.074,
-      "pages_per_second": 215.31
-    },
-    "chunking": {
-      "chunks": 517,
-      "avg_time_seconds": 1.407,
-      "chunks_per_second": 367.54
-    },
-    "embedding": {
-      "chunks": 517,
-      "avg_time_seconds": 4.448,
-      "chunks_per_second": 116.24
-    },
-    "end_to_end": {
-      "total_chunks": 517,
-      "total_time_seconds": 32.09
-    },
-    "memory": {
-      "peak_memory_mb": 69.05,
-      "memory_used_mb": -16.23
-    }
-  },
-  "medium_13pages.pdf": {
+  "large.pdf": {
     "extraction": {
       "pages": 48,
-      "avg_time_seconds": 0.373,
-      "pages_per_second": 128.78
+      "avg_time_seconds": 0.358,
+      "pages_per_second": 134.01
     },
     "chunking": {
       "chunks": 1582,
-      "avg_time_seconds": 3.33,
-      "chunks_per_second": 475.04
+      "avg_time_seconds": 3.423,
+      "chunks_per_second": 462.21
     },
     "embedding": {
       "chunks": 1582,
-      "avg_time_seconds": 14.453,
-      "chunks_per_second": 109.46
+      "avg_time_seconds": 13.45,
+      "chunks_per_second": 117.62
     },
     "end_to_end": {
       "total_chunks": 1582,
-      "total_time_seconds": 106.116
+      "total_time_seconds": 104.178
     },
     "memory": {
-      "peak_memory_mb": 79.0,
-      "memory_used_mb": -36.77
+      "peak_memory_mb": 93.2,
+      "memory_used_mb": 4.28
     }
   },
-  "small_8pages.pdf": {
+  "medium.pdf": {
+    "extraction": {
+      "pages": 12,
+      "avg_time_seconds": 0.092,
+      "pages_per_second": 130.02
+    },
+    "chunking": {
+      "chunks": 457,
+      "avg_time_seconds": 0.987,
+      "chunks_per_second": 463.15
+    },
+    "embedding": {
+      "chunks": 457,
+      "avg_time_seconds": 5.091,
+      "chunks_per_second": 89.77
+    },
+    "end_to_end": {
+      "total_chunks": 457,
+      "total_time_seconds": 30.325
+    },
+    "memory": {
+      "peak_memory_mb": 69.98,
+      "memory_used_mb": 3.61
+    }
+  },
+  "small.pdf": {
     "extraction": {
       "pages": 15,
-      "avg_time_seconds": 0.111,
-      "pages_per_second": 135.68
+      "avg_time_seconds": 0.119,
+      "pages_per_second": 125.55
     },
     "chunking": {
       "chunks": 233,
-      "avg_time_seconds": 0.806,
-      "chunks_per_second": 288.98
+      "avg_time_seconds": 0.676,
+      "chunks_per_second": 344.55
     },
     "embedding": {
       "chunks": 233,
-      "avg_time_seconds": 11.26,
-      "chunks_per_second": 20.69
+      "avg_time_seconds": 3.747,
+      "chunks_per_second": 62.19
     },
     "end_to_end": {
       "total_chunks": 233,
-      "total_time_seconds": 24.872
+      "total_time_seconds": 17.27
     },
     "memory": {
-      "peak_memory_mb": 52.62,
-      "memory_used_mb": -56.89
+      "peak_memory_mb": 50.8,
+      "memory_used_mb": -43.12
     }
   },
   "search": {
     "queries": 10,
-    "avg_latency_ms": 144.6
+    "avg_latency_ms": 424.66
   }
 }

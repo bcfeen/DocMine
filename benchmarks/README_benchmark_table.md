@@ -4,10 +4,10 @@
 
 | PDF Size | Pages | Extraction Time | Chunks Created | Chunking Time | Embedding Time | **Total Time** |
 |----------|-------|-----------------|----------------|---------------|----------------|----------------|
-| Large 34Pages | 16 | 0.074s | 517 | 1.407s | 4.448s | **32.09s** |
-| Medium 13Pages | 48 | 0.373s | 1582 | 3.33s | 14.453s | **106.116s** |
-| Small 8Pages | 15 | 0.111s | 233 | 0.806s | 11.26s | **24.872s** |
+| Large | 48 | 0.358s | 1582 | 3.423s | 13.45s | **104.178s** |
+| Medium | 12 | 0.092s | 457 | 0.987s | 5.091s | **30.325s** |
+| Small | 15 | 0.119s | 233 | 0.676s | 3.747s | **17.27s** |
 
 **Search Performance:**
-- Average query latency: 144.6ms
+- Average query latency: 424.66ms
 - Measured over 10 queries

@@ -41,10 +41,11 @@ def prepare_test_suite():
     print("=" * 60)
     print("\nDownloading test PDFs from arXiv...\n")
 
+    # Selected for variety: ~15 pages, ~30 pages, ~50 pages
     test_pdfs = {
-        'small_8pages.pdf': '1706.03762',      # Attention is All You Need (8 pages)
-        'medium_13pages.pdf': '2103.00020',    # CLIP paper (13 pages)
-        'large_34pages.pdf': '1810.04805',     # BERT paper (34 pages)
+        'small.pdf': '1706.03762',      # Attention is All You Need (15 pages)
+        'medium.pdf': '1512.03385',     # ResNet (12 pages)
+        'large.pdf': '2103.00020',      # CLIP (48 pages)
     }
 
     downloaded = {}
