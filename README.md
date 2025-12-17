@@ -135,17 +135,19 @@ Links: Segment ↔ Entity (many-to-many)
 
 ## Performance
 
-**Real benchmarks** (Darwin arm64, Python 3.13):
+**Real benchmarks** (macOS M-series, Python 3.13):
 
-| PDF | Pages | Segments | Ingestion | Re-ingest | Search |
-|-----|-------|----------|-----------|-----------|--------|
-| Small | 15 | 233 | 17s | <1s | 425ms |
-| Medium | 12 | 457 | 30s | <1s | 425ms |
-| Large | 48 | 1,582 | 104s | <1s | 425ms |
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Ingestion | 4.3s | 12-page PDF → 181 segments + 15 entities |
+| Re-ingestion | 0.28s | **15x faster** (idempotent hash check) |
+| Semantic search | 37ms | Median latency (top-5 results) |
+| Exact recall | 1.6ms | Entity lookup via SQL JOIN |
+| Throughput | ~42 segments/sec | Including entity extraction + embeddings |
 
-**Key insight:** Re-ingestion detects content hash match and skips processing (idempotency win).
+**Why re-ingestion is fast:** Content hash detection skips unnecessary reprocessing. Same file = instant skip.
 
-**Scalability:** Current brute-force search works well up to ~100k segments. For larger corpora, integrate FAISS or HNSW (contribution welcome!).
+**Scalability:** Brute-force cosine similarity works well for <100k segments. For larger corpora, integrate FAISS/HNSW (contribution welcome!).
 
 ---
 
