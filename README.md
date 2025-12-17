@@ -15,7 +15,7 @@ pipeline.ingest_file("paper.pdf")
 # Semantic search
 results = pipeline.search("BRCA1 mutations", top_k=5)
 
-# Exact recall - find ALL mentions
+# Exact recall - all segments linked to this entity
 segments = pipeline.search_entity("BRCA1", entity_type="gene")
 ```
 
@@ -24,12 +24,12 @@ segments = pipeline.search_entity("BRCA1", entity_type="gene")
 ## Why DocMine?
 
 **vs. LangChain/LlamaIndex**
-- Lightweight, zero-dependency pipeline (just embeddings + DuckDB)
+- Lightweight stack (PyMuPDF + sentence-transformers + DuckDB)
 - Idempotent ingestion - re-ingest files without duplicates
 - Deterministic segment IDs - same content always generates same ID
 
 **vs. Traditional RAG**
-- Exact recall capability - find ALL entity mentions (not just semantic matches)
+- Exact recall - retrieve all segments linked to an entity (not just semantic matches)
 - Full provenance tracking - every segment knows its page/sentence/offset
 - Entity extraction built-in - genes, proteins, DOIs, custom patterns
 
@@ -77,9 +77,9 @@ for r in results:
     print(f"[Page {r['provenance']['page']}] {r['text'][:100]}...")
     print(f"Score: {r['score']:.2f}\n")
 
-# Exact recall - guaranteed complete
+# Exact recall - all linked segments
 segments = pipeline.search_entity("BRCA1", entity_type="gene")
-print(f"Found ALL {len(segments)} mentions of BRCA1")
+print(f"Found {len(segments)} segments linked to BRCA1")
 
 # Browse entities
 entities = pipeline.list_entities(min_mentions=2)
@@ -135,7 +135,7 @@ Links: Segment ↔ Entity (many-to-many)
 
 ## Performance
 
-**Real benchmarks** (macOS M-series, Python 3.13):
+**Benchmarks** (macOS M-series, Python 3.13, `all-mpnet-base-v2` embeddings):
 
 | Metric | Value | Notes |
 |--------|-------|-------|
@@ -145,9 +145,11 @@ Links: Segment ↔ Entity (many-to-many)
 | Exact recall | 1.6ms | Entity lookup via SQL JOIN |
 | Throughput | ~42 segments/sec | Including entity extraction + embeddings |
 
-**Why re-ingestion is fast:** Content hash detection skips unnecessary reprocessing. Same file = instant skip.
+**Methodology:** Single 12-page academic PDF (800KB), cold cache, MPS backend. See [`benchmarks/quick_bench.py`](benchmarks/quick_bench.py) to reproduce.
 
-**Scalability:** Brute-force cosine similarity works well for <100k segments. For larger corpora, integrate FAISS/HNSW (contribution welcome!).
+**Why re-ingestion is fast:** Content hash detection skips reprocessing. Same file = instant skip.
+
+**Design choice:** Brute-force cosine similarity prioritizes correctness and simplicity. Works well for <100k segments. For larger corpora, FAISS/HNSW is pluggable (contribution welcome!).
 
 ---
 
@@ -187,14 +189,14 @@ pipeline = KOSPipeline(entity_extractor=extractor)
 
 ### Exact vs. Semantic Search
 ```python
-# Semantic: fast but incomplete (may miss low-similarity mentions)
-semantic = pipeline.search("CCNA001", top_k=10)
+# Semantic: fast but may miss low-similarity mentions
+semantic = pipeline.search("BRCA1", top_k=10)
 
-# Exact: guaranteed complete (finds ALL extracted entity links)
-exact = pipeline.search_entity("CCNA001")
+# Exact: returns all segments linked to the extracted entity
+exact = pipeline.search_entity("BRCA1", entity_type="gene")
 
 print(f"Semantic: {len(semantic)} | Exact: {len(exact)}")
-# Usually: exact >= semantic
+# Exact returns all linked segments (may be more or fewer than semantic top-k)
 ```
 
 ---
@@ -221,13 +223,13 @@ Fully extensible for custom domains.
 ### 3. Exact Recall
 ```python
 # Semantic search might miss mentions if embedding similarity is low
-semantic = pipeline.search("obscure gene name", top_k=10)
+semantic = pipeline.search("BRCA1", top_k=10)
 
-# Exact recall finds EVERYTHING (guaranteed complete over extracted links)
-exact = pipeline.search_entity("obscure gene name", entity_type="gene")
+# Exact recall returns all segments linked to the extracted entity
+exact = pipeline.search_entity("BRCA1", entity_type="gene")
 ```
 
-Critical for compliance, verification, complete entity tracking.
+Guaranteed complete over extracted entity links. Critical for compliance, verification, entity tracking.
 
 ### 4. Full Provenance
 ```python
